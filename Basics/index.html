@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debugger Demo with var, let, and const</title>
+</head>
+<body>
+    <h1>Debugging Scope and Call Stack with var, let, and const</h1>
+    <button id="startButton">Start Debugging</button>
+
+    <script>
+        // Global Scope
+        var globalVar = "I am a global var";
+        let globalLet = "I am a global let";
+        const globalConst = "I am a global const";
+
+        document.getElementById("startButton").addEventListener("click", function() {
+            console.log("Starting Debugger...");
+
+            // Local scope within the event listener
+            var localVar = "I am a local var in event listener";
+            let localLet = "I am a local let in event listener";
+            const localConst = "I am a local const in event listener";
+
+            function outerFunction() {
+                var outerVar = "I am a var in outerFunction";
+                let outerLet = "I am a let in outerFunction";
+                const outerConst = "I am a const in outerFunction";
+
+                function innerFunction() {
+                    var innerVar = "I am a var in innerFunction";
+                    let innerLet = "I am a let in innerFunction";
+                    const innerConst = "I am a const in innerFunction";
+
+                    // Trigger the debugger statement to pause execution
+                    debugger;
+
+                    // Log variables to inspect scope
+                    console.log("Inside innerFunction:");
+                    console.log("globalVar:", globalVar); // Accessible globally
+                    console.log("globalLet:", globalLet); // Accessible globally
+                    console.log("globalConst:", globalConst); // Accessible globally
+                    console.log("outerVar:", outerVar); // Accessible within outerFunction and innerFunction
+                    console.log("outerLet:", outerLet); // Accessible within outerFunction and innerFunction
+                    console.log("outerConst:", outerConst); // Accessible within outerFunction and innerFunction
+                    console.log("innerVar:", innerVar); // Accessible only within innerFunction
+                    console.log("innerLet:", innerLet); // Accessible only within innerFunction
+                    console.log("innerConst:", innerConst); // Accessible only within innerFunction
+
+                    // The following will throw an error if uncommented, as `localVar` is out of scope
+                    // console.log("localVar:", localVar);
+                    // console.log("localLet:", localLet);
+                    // console.log("localConst:", localConst);
+                }
+
+                innerFunction();
+            }
+
+            outerFunction();
+        });
+    </script>
+</body>
+</html>

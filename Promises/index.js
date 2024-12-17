@@ -23,8 +23,8 @@ const promise1= fetch(GITHUB_API);
 
 
     promise1.then((data)=>{
-    console.log(data);
-    console.log(data);
+    console.log(promise1);
+    //console.log(data);
     })
 
 
